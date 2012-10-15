@@ -18,6 +18,7 @@ h2. Usage
 # Clone repository onto your system
 # Edit @config/initializers/condo_providers.rb@
 # Set the required environmental variables with your providers security keys
+#* As defined in condo_providers.rb
 # @bundle install@
 # @rails server@
 # Browse to: http://localhost:3000/
