@@ -1,0 +1,99 @@
+h1. Condo Example App
+
+A basic implementation of "Condo":https://github.com/cotag/Condominios to demonstrate uploading files directly from the browser to "Amazon S3":http://aws.amazon.com/s3/ or "Google Cloud Storage":https://cloud.google.com/products/cloud-storage
+* Supports drag and drop
+* Multiple uploads
+* Pause / Resume functionality (Resumable, chunked, uploads are available on Amazon for files over 5MB.)
+
+
+h3. Caveats (as of 15 Oct 2012)
+
+* Google does not support CORS on resumable uploads yet.
+* Rackspace's REST API has been implemented however doesn't work as it doesn't support preflight requests.
+* Azure doesn't support CORS at all and is not implemented here yet.
+
+
+h2. Usage
+
+# Clone repository onto your system
+# Edit @config/initializers/condo_providers.rb@
+# Set the required environmental variables with your providers security keys
+# @bundle install@
+# @rails server@
+# Browse to: http://localhost:3000/
+
+
+h3. Configuring your provider
+
+h4. Amazon
+
+# "Enable CORS":http://aws.typepad.com/aws/2012/08/amazon-s3-cross-origin-resource-sharing.html at the bucket level
+
+<pre><code class="xml">
+
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>http://localhost:3000</AllowedOrigin>
+        <AllowedMethod>PUT</AllowedMethod>
+        <AllowedMethod>POST</AllowedMethod>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+    </CORSRule>
+</CORSConfiguration>
+
+</code></pre>
+
+You may want to apply similar configurations programmatically in production, especially if you have a bucket per-user.
+
+
+h4. Google
+
+# Enable 'Interoperable Storage Access' on your application
+# Enable CORS at the bucket level - "Googles documentation":https://developers.google.com/storage/docs/cross-origin
+
+<pre><code class="xml">
+
+<?xml version="1.0" encoding="UTF-8"?>
+<CorsConfig>
+  <Cors>
+    <Origins>
+      <Origin>http://localhost:3000</Origin>
+    </Origins>
+    <Methods>
+      <Method>GET</Method>
+      <Method>HEAD</Method>
+      <Method>POST</Method>
+      <Method>PUT</Method>
+    </Methods>
+    <ResponseHeaders>
+      <ResponseHeader>origin</ResponseHeader>
+      <ResponseHeader>content-md5</ResponseHeader>
+      <ResponseHeader>authorization</ResponseHeader>
+      <ResponseHeader>x-goog-date</ResponseHeader>
+      <ResponseHeader>x-goog-acl</ResponseHeader>
+      <ResponseHeader>content-type</ResponseHeader>
+      <ResponseHeader>accept</ResponseHeader>
+      <ResponseHeader>x-goog-api-version</ResponseHeader>
+      <ResponseHeader>x-goog-resumable</ResponseHeader>
+      <ResponseHeader>ETag</ResponseHeader>
+    </ResponseHeaders>
+    <MaxAgeSec>1800</MaxAgeSec>
+  </Cors>
+</CorsConfig>
+
+</code></pre>
+
+I wrote a helper function in Condo for applying this using "Fog":http://fog.io/ however fog doesn't sign the request properly fog/fog#1206 at the time of writing
+
+
+h4. Rackspace
+
+This doesn't support preflight CORS requests yet and hence does not work.
+However if you do want to enable "temporary URLs":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Create_TempURL-d1a444.html you need to set a "metadata header"http://docs.rackspace.com/files/api/v1/cf-devguide/content/Set_Account_Metadata-d1a4460.html on your account.
+There is also a helper function in Condo that achieves this.
+
+
