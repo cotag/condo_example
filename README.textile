@@ -26,6 +26,7 @@ h2. Usage
 # Set the required environmental variables with your providers security keys
 #* As defined in condo_providers.rb
 # @bundle install@
+# @rake db:migrate@
 # @rails server@
 # Browse to: http://localhost:3000/
 
