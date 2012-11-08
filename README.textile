@@ -86,13 +86,13 @@ h4. Google
 
 </code></pre>
 
-I wrote a helper function in Condo for applying this using "Fog":http://fog.io/ however fog doesn't sign the request properly" at the time of writing
+I wrote a helper function in Condo for applying this using "Fog":http://fog.io/
 
 
 h4. Rackspace
 
-This doesn't support preflight CORS requests yet and hence does not work.
-However if you do want to enable "temporary URLs":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Create_TempURL-d1a444.html you need to set a "metadata header":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Set_Account_Metadata-d1a4460.html on your account.
-There is also a helper function in Condo that achieves this.
+This doesn't support preflight CORS requests yet and hence does not work. Could be useful for a native application.
+If you do want to use it you'll have to enable "temporary URLs":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Create_TempURL-d1a444.html you need to set a "metadata header":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Set_Account_Metadata-d1a4460.html on your account.
+There is also a helper function in Condo that achieves this using Fog
 
 
