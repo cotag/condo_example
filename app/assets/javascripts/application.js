@@ -16,3 +16,6 @@
 //= require condo
 //= require condo_interface
 
+
+angular.module('CondoApp', ['CondoUploader', 'CondoInterface']);
+

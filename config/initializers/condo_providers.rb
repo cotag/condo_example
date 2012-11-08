@@ -6,10 +6,12 @@
 #
 # NOTE:: The first definition is treated as the default.
 # 	It is possible to dynamically set the provider from the controller without configuring anything here
+# => http://www.elastician.com/2009/12/comprehensive-list-of-aws-endpoints.html
 #
 Condo::Configuration.add_residence(:AmazonS3, {
 	:access_id => ENV['S3_KEY'],
-	:secret_key => ENV['S3_SECRET']
+	:secret_key => ENV['S3_SECRET']#,
+	#:location => 'ap-southeast-1'
 })
 
 

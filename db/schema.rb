@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925014051) do
+ActiveRecord::Schema.define(:version => 20121106023203) do
 
   create_table "condo_uploads", :force => true do |t|
     t.string   "user_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120925014051) do
     t.boolean  "resumable",          :default => false
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+    t.text     "file_path"
   end
 
 end
