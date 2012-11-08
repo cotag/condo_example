@@ -1,9 +1,12 @@
 h1. Condo Example App
 
 A basic implementation of "Condo":https://github.com/cotag/Condominios to demonstrate uploading files directly from the browser to "Amazon S3":http://aws.amazon.com/s3/ or "Google Cloud Storage":https://cloud.google.com/products/cloud-storage
-* Supports drag and drop
-* Multiple uploads
-* Pause / Resume functionality (Resumable, chunked, uploads are available on Amazon for files over 5MB.)
+* Supports drag and drop (with folders)
+* Multiple uploads (can easily handle 1000's of files)
+* Pause / Resume functionality (Resumable and chunked uploads are available on Amazon for files over 5MB.)
+
+
+!https://raw.github.com/cotag/condo_example/master/doc/upload_screenshot.png!
 
 
 h3. Caveats (as of 15 Oct 2012)
@@ -17,6 +20,9 @@ h2. Usage
 
 # Clone repository onto your system
 # Edit @config/initializers/condo_providers.rb@
+# Edit @app/controllers/uploads_controller.rb@
+#* @set_callback :bucket_name@ should be set to an existing bucket
+#* configuring your provider (see below)
 # Set the required environmental variables with your providers security keys
 #* As defined in condo_providers.rb
 # @bundle install@
