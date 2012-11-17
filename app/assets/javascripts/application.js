@@ -15,7 +15,10 @@
 //= require angular/angular
 //= require condo
 //= require condo_interface
+//= require condo/amazon
+//= require condo/rackspace
+//= require condo/google
 
 
-angular.module('CondoApp', ['CondoUploader', 'CondoInterface']);
+angular.module('CondoApp', ['CondoUploader', 'CondoInterface', 'CondoAmazonProvider', 'CondoGoogleProvider', 'CondoRackspaceProvider']);
 
