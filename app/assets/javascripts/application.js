@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require angular/angular
+//= require angular
 //= require condo
 //= require condo_interface
 //= require condo/amazon
@@ -20,5 +20,9 @@
 //= require condo/google
 
 
-angular.module('CondoApp', ['CondoUploader', 'CondoInterface', 'CondoAmazonProvider', 'CondoGoogleProvider', 'CondoRackspaceProvider']);
-
+angular.module('CondoApp', ['CondoUploader', 'CondoInterface', 'CondoAmazonProvider', 'CondoGoogleProvider', 'CondoRackspaceProvider'],
+	['Condo.ConfigProvider', function(options) {
+		
+		options.parallelism = 4;
+		
+	}]);

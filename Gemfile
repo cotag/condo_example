@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'angularjs-rails'
 gem 'condo'
 gem 'condo_active_record'
 gem 'condo_interface'
