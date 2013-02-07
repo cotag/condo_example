@@ -20,7 +20,7 @@
 //= require condo/google
 
 
-angular.module('CondoApp', ['CondoUploader', 'CondoInterface', 'CondoAmazonProvider', 'CondoGoogleProvider', 'CondoRackspaceProvider'],
+angular.module('CondoApp', ['Condo', 'CondoInterface', 'CondoAmazonProvider', 'CondoGoogleProvider', 'CondoRackspaceProvider'],
 	['Condo.ConfigProvider', function(options) {
 		
 		options.parallelism = 4;
