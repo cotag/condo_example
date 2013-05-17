@@ -9,12 +9,6 @@ A basic implementation of "Condo":https://github.com/cotag/Condominios to demons
 !https://raw.github.com/cotag/condo_example/master/doc/upload_screenshot.png!
 
 
-h3. Caveats (as of 15 Oct 2012)
-
-* Google does not support CORS on resumable uploads yet.
-* Rackspace's REST API has been implemented however doesn't work as it doesn't support preflight requests.
-* Azure doesn't support CORS at all and is not implemented here yet.
-
 
 h2. Usage
 
@@ -98,7 +92,7 @@ I wrote a helper function in Condo for applying this using "Fog":http://fog.io/
 
 h4. Rackspace
 
-This doesn't support preflight CORS requests yet and hence does not work. Could be useful for a native application.
+I think this supports preflight CORS requests however I have had no success.
 If you do want to use it you'll have to enable "temporary URLs":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Create_TempURL-d1a444.html you need to set a "metadata header":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Set_Account_Metadata-d1a4460.html on your account.
 There is also a helper function in Condo that achieves this using Fog
 
