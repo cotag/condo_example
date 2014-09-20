@@ -38,12 +38,12 @@ Condo::Configuration.add_residence(:AmazonS3, {
 
 
 #
-# NOTE:: Whilst this provider could technically work,
-#		Rackspace currently ignores preflight requests so this doesn't work at all
+# Enable this if you would like to use Rackspace Cloud Files.
+# => Enable CORS http://docs.rackspace.com/files/api/v1/cf-devguide/content/CORS_Container_Header-d1e1300.html
 #
 #Condo::Configuration.add_residence(:RackspaceCloudFiles, {
 #	:username => ENV['RACKS_KEY'],
-#	:secret_key => ENV['RACKS_SECRET']
+#	:secret_key => ENV['RACKS_SECRET']  # This is the API key
 #})
 
 
