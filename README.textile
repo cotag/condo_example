@@ -92,8 +92,8 @@ I wrote a helper function in Condo for applying this using "Fog":http://fog.io/
 
 h4. Rackspace
 
-I think this supports preflight CORS requests however I have had no success.
 If you do want to use it you'll have to enable "temporary URLs":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Create_TempURL-d1a444.html you need to set a "metadata header":http://docs.rackspace.com/files/api/v1/cf-devguide/content/Set_Account_Metadata-d1a4460.html on your account.
-There is also a helper function in Condo that achieves this using Fog
+There is also a helper function in Condo that achieves this using Fog.
+You'll also need to enable CORS: http://docs.rackspace.com/files/api/v1/cf-devguide/content/CORS_Container_Header-d1e1300.html
 
 
