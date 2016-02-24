@@ -29,14 +29,19 @@ class UploadsController < ApplicationController
 	# This is a request for the current user_id
 	# => Return nil if there is no valid session or logged in user etc
 	#
-	set_callback :resident_id, proc { session[:user] || :anonymous }	# session[:user] # for instance
+	condo_callback :resident_id, proc {
+		session[:user] || :anonymous
+	}	# session[:user] # for instance
 	
 	#
 	# Note:: This should store a reference to the file in the applications database
-	# => Should return true (via coercion) if the reference was stored and the upload reference will be destroyed
+	# => Should return true (via coercion) if the reference was stored
 	# => Return nil or false if something failed
 	#
-	set_callback :upload_complete do |upload|
+	# It is up to you to destroy the upload reference
+	#
+	condo_callback :upload_complete do |upload|
+		upload.destroy
 		true
 	end
 	
@@ -47,7 +52,7 @@ class UploadsController < ApplicationController
 	# => Should return true (via coercion, if the task was scheduled or file destroyed successfully) and the upload reference will be destroyed
 	# => Return nil or false if something failed and the upload reference will be maintained
 	#
-	set_callback :destroy_upload, lambda { |upload|
+	condo_callback :destroy_upload, lambda { |upload|
 		#
 		# Delete file from cloud files using Fog (SHOULD NOT DO THIS IN PRODUCTION - USE A BACKGROUND TASK)
 		#
@@ -74,7 +79,7 @@ class UploadsController < ApplicationController
 	# => Note:: At this point the user has already been validated and the filename has been normalised
 	# => Of course this doesn't guarantee the user is uploading valid data.
 	#
-	set_callback :pre_validation, lambda { |*args|
+	condo_callback :pre_validation, lambda { |*args|
 		#
 		# Check the file type is valid: params[:upload][:file_name]
 		# Check the file size is valid: params[:upload][:file_size]
@@ -92,7 +97,7 @@ class UploadsController < ApplicationController
 	# Should return the bucket name for the current user (or the bucket you are using for the application)
 	# => You probably want to create the bucket as a background task on user sign-up etc
 	#
-	set_callback :bucket_name, proc {
+	condo_callback :bucket_name, proc {
 		'acasignage'	# "#{Rails.application.class.parent_name}#{current_resident}"	# this is the default
 	}
 	
@@ -100,7 +105,7 @@ class UploadsController < ApplicationController
 	# The name of the file when saved on the cloud storage system
 	# => Note:: The default is params[:upload][:file_name] after being normalised
 	#
-	set_callback :object_key, proc {
+	condo_callback :object_key, proc {
 		"#{Time.now.to_f.to_s.sub('.', '')}#{rand(1000)}#{File.extname(params[:file_name])}"
 	}
 	
@@ -123,7 +128,7 @@ class UploadsController < ApplicationController
 	#
 	# Set object options - you can set provider specific options here too
 	#
-	set_callback :object_options, proc {
+	condo_callback :object_options, proc {
 		{:permissions => :private}	# Objects are private by default, maybe you would like them to be public?
 	}
 	
@@ -131,14 +136,12 @@ class UploadsController < ApplicationController
 	#
 	# Maybe you want to do this differently?
 	#
-	set_callback :sanitize_filename do
-		params[:file_name].tap do |filename|
-			filename.gsub!(/^.*(\\|\/)/, '')	# get only the filename (just in case)
-			filename.gsub!(/[^\w\.\-]/,'_')		# replace all non alphanumeric or periods with underscore
-		end
+	condo_callback :sanitize_filename do |filename|
+		filename = filename.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+		filename.gsub!(/^.*(\\|\/)/, '')	# get only the filename (just in case)
+		filename.gsub!(/[^\w\.\-]/, '_')	# replace all non alphanumeric or periods with underscore
+		filename
 	end
-	
-	
 	
 	
 	#

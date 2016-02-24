@@ -1,5 +1,9 @@
 
 
+require 'condo'
+require 'condo_active_record'
+require 'condo/strata/amazon_s3'
+
 #
 # Define the various storage providers you would like to upload to here.
 #	15 Oct 2012 - Amazon S3 is the only fully featured provider
@@ -45,5 +49,3 @@ Condo::Configuration.add_residence(:AmazonS3, {
 #	:username => ENV['RACKS_KEY'],
 #	:secret_key => ENV['RACKS_SECRET']  # This is the API key
 #})
-
-
