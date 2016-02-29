@@ -35,7 +35,7 @@ class UploadsController < ApplicationController
     #
     # It is up to you to destroy the upload reference
     condo_callback :upload_complete do |upload|
-        upload.destroy
+        upload.remove_entry
         true
     end
 
