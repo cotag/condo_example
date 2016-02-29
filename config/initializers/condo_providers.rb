@@ -4,7 +4,7 @@ require 'condo'
 require 'condo_active_record'
 require 'condo/strata/amazon_s3'
 require 'condo/strata/google_cloud_storage'
-require 'condo/strata/rackspace_cloud_files'
+require 'condo/strata/open_stack_swift'
 
 #
 # Define the various storage providers you would like to upload to here.
@@ -50,7 +50,7 @@ Condo::Configuration.add_residence(:GoogleCloudStorage, {
 # => Enable CORS http://docs.rackspace.com/files/api/v1/cf-devguide/content/CORS_Container_Header-d1e1300.html
 #
 =begin
-Condo::Configuration.add_residence(:RackspaceCloudFiles, {
+Condo::Configuration.add_residence(:OpenStackSwift, {
     :username => ENV['RACKS_KEY'],
 
     # This is the API key

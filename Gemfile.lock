@@ -1,14 +1,14 @@
 PATH
   remote: ../Condominios
   specs:
-    condo (1.0.6)
+    condo (2.0.0)
       fog
       rails
 
 PATH
   remote: ../condo_active_record
   specs:
-    condo_active_record (1.0.0)
+    condo_active_record (2.0.0)
       condo
       rails
 
