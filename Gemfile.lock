@@ -1,17 +1,3 @@
-PATH
-  remote: ../Condominios
-  specs:
-    condo (2.0.0)
-      fog
-      rails
-
-PATH
-  remote: ../condo_active_record
-  specs:
-    condo_active_record (2.0.0)
-      condo
-      rails
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,6 +40,12 @@ GEM
     arel (6.0.3)
     builder (3.2.2)
     concurrent-ruby (1.0.0)
+    condo (2.0.0)
+      fog
+      rails
+    condo_active_record (2.0.0)
+      condo
+      rails
     erubis (2.7.0)
     excon (0.45.4)
     fission (0.5.0)
@@ -235,11 +227,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  condo!
-  condo_active_record!
-  fog
-  rails
-  sqlite3
+  condo (~> 2.0)
+  condo_active_record (~> 2.0)
+  fog (~> 1.37)
+  rails (~> 4.2)
+  sqlite3 (~> 1.3)
 
 BUNDLED WITH
    1.10.6
