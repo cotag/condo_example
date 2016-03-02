@@ -2,9 +2,6 @@
 
 require 'condo'
 require 'condo_active_record'
-require 'condo/strata/amazon_s3'
-require 'condo/strata/google_cloud_storage'
-require 'condo/strata/open_stack_swift'
 
 #
 # Define the various storage providers you would like to upload to here.
@@ -60,5 +57,13 @@ Condo::Configuration.add_residence(:OpenStackSwift, {
     # Basically your account identifier
     :storage_url => ENV['RACKS_STORAGE_URL'],
     :temp_url_key => ENV['RACKS_TEMP_URL_KEY']
+})
+=end
+
+=begin
+Condo::Configuration.add_residence(:MicrosoftAzure, {
+    :account_name => ENV['AZURE_STORAGE_ACCOUNT'],
+    :access_key => ENV['AZURE_STORAGE_ACCESS_KEY'] #,
+    #:blob_host => 'http://127.0.0.1:10000/' # For dev
 })
 =end
